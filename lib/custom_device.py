@@ -24,20 +24,22 @@ class CustomDevice:
 
 
 class CustomDeviceCreator:
-    def __init__(self, broadlink_controller: BroadlinkController, device_name, modify_existing=False):
+    def __init__(self, broadlink_controller: BroadlinkController, device_name=None, modify_existing_path=None):
         self.controller = broadlink_controller
-        self.name = device_name
         self.config = {}
 
-        if modify_existing:
+        if modify_existing_path:
+            self.name = os.path.basename(modify_existing_path).replace(".device", "")
             try:
-                with open(f"{self.name}.device", "rb") as file:
+                with open(modify_existing_path, "rb") as file:
                     self.config = pickle.load(file)
                     existing_commands = self.config.keys()
-                    print(f"loaded device {self.name}.device with commands: {existing_commands}")
+                    print(f"loaded device {self.name}.device with commands: {', '.join(existing_commands)}")
             except:
                 print(f"failed to load device {self.name}.device, creating new device")
                 self.config = {}
+        else:
+            self.name = device_name
 
     def save(self, directory=""):
         file_name = f"{self.name}.device"
@@ -60,12 +62,18 @@ class CustomDeviceCreator:
     def train_rf(self, command_name):
         print(f"training rf for {command_name}")
         packet = self.controller.train_rf()
-        self.__add_command(command_name, packet)
+        if packet:
+            self.__add_command(command_name, packet)
+            return True
+        return False
 
     def train_ir(self, command_name):
         print(f"training ir for {command_name}")
         packet = self.controller.train_ir()
-        self.__add_command(command_name, packet)
+        if packet:
+            self.__add_command(command_name, packet)
+            return True
+        return False
 
     def test_command(self, command_name):
         print(f"testing command for {command_name}")
