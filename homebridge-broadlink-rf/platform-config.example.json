@@ -28,6 +28,16 @@
                 { "name": "Auto Mode", "command": "auto" },
                 { "name": "Fan Only", "command": "fan_only" }
             ]
+        },
+        {
+            "name": "Bedroom Tower Fan",
+            "device": "bedroom_tower_fan",
+            "controller": "rmmini",
+            "power": { "on": "on", "off": "off" },
+            "oscillate": { "toggle": "toggle_oscillate" },
+            "buttons": [
+                { "name": "Next Speed", "command": "next_speed" }
+            ]
         }
     ]
 }
