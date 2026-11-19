@@ -1,0 +1,33 @@
+{
+    "platform": "BroadlinkRF",
+    "name": "Broadlink RF",
+    "controllers": [
+        { "name": "rm4pro", "host": "10.0.0.20" },
+        { "name": "rmmini", "host": "10.0.0.4" }
+    ],
+    "accessories": [
+        {
+            "name": "Office Ceiling Fan",
+            "device": "office_fan",
+            "controller": "rm4pro",
+            "speeds": ["speed1", "speed2", "speed3"],
+            "off": "fan_off",
+            "light": { "on": "light_on", "off": "light_off" }
+        },
+        {
+            "name": "Dyson Heater",
+            "device": "dyson_heater",
+            "controller": "rmmini",
+            "power": { "on": "on", "off": "off" },
+            "oscillate": { "on": "oscillation_on", "off": "oscillation_off" },
+            "buttons": [
+                { "name": "Heat Up", "command": "temp_up" },
+                { "name": "Heat Down", "command": "temp_down" },
+                { "name": "Fan Speed Up", "command": "fan_speed_up" },
+                { "name": "Fan Speed Down", "command": "fan_speed_down" },
+                { "name": "Auto Mode", "command": "auto" },
+                { "name": "Fan Only", "command": "fan_only" }
+            ]
+        }
+    ]
+}

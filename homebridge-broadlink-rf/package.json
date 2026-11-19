@@ -1,0 +1,18 @@
+{
+  "name": "homebridge-broadlink-rf",
+  "displayName": "Broadlink RF",
+  "version": "0.2.3",
+  "description": "Ceiling fans and lights on RF/IR remotes, sent directly through a Broadlink RM4 Pro using packets learned with python-broadlink.",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin",
+    "supports-hap",
+    "broadlink"
+  ],
+  "engines": {
+    "homebridge": "^1.8.0 || ^2.0.0",
+    "node": ">=18"
+  }
+}

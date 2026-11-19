@@ -1,0 +1,87 @@
+{
+  "pluginAlias": "BroadlinkRF",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "devicesFile": {
+        "title": "Exported devices JSON",
+        "description": "Output of cli/export_custom_devices",
+        "type": "string",
+        "required": true
+      },
+      "controllers": {
+        "title": "Broadlink controllers",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "title": "Name", "type": "string", "required": true },
+            "host": { "title": "IP address", "type": "string", "format": "ipv4", "required": true }
+          }
+        }
+      },
+      "accessories": {
+        "title": "Accessories",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "title": "Name", "type": "string", "required": true },
+            "device": { "title": "Device name in the JSON", "type": "string", "required": true },
+            "controller": {
+              "title": "Controller name",
+              "description": "Optional when only one controller is configured",
+              "type": "string"
+            },
+            "speeds": {
+              "title": "Speed commands, slowest first",
+              "description": "Gives the fan a speed slider",
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "off": { "title": "Fan off command (with speeds)", "type": "string" },
+            "power": {
+              "title": "Power (on/off fan without speeds)",
+              "type": "object",
+              "properties": {
+                "on": { "title": "On command", "type": "string" },
+                "off": { "title": "Off command", "type": "string" }
+              }
+            },
+            "oscillate": {
+              "title": "Oscillation",
+              "description": "Either on + off commands, or a single toggle command",
+              "type": "object",
+              "properties": {
+                "on": { "title": "Oscillation on command", "type": "string" },
+                "off": { "title": "Oscillation off command", "type": "string" },
+                "toggle": { "title": "Oscillation toggle command", "type": "string" }
+              }
+            },
+            "light": {
+              "title": "Light",
+              "type": "object",
+              "properties": {
+                "on": { "title": "Light on command", "type": "string" },
+                "off": { "title": "Light off command", "type": "string" }
+              }
+            },
+            "buttons": {
+              "title": "Buttons (one-shot commands)",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "title": "Button name", "type": "string" },
+                  "command": { "title": "Command", "type": "string", "required": true }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
